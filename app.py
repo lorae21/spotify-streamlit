@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from prediction import predict
-
+import joblib
 
 st.title("Song Popularity Prediction")
 st.markdown('Model to predict the genre of a song given its features.\
@@ -29,6 +29,9 @@ liveness = st.slider("Liveness", 0.0, 1.0, 0.5)
 valence = st.slider("Valence", 0.0, 1.0, 0.5)
 tempo = st.slider("Tempo", 0.0, 250.0, 120.0)
 
+def predict(data):
+    clf = joblib.load("rf_model.sav")
+    return clf.predict(data)
 
 st.text('')
 if st.button("Predict song genre"):
